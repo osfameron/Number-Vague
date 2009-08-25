@@ -77,13 +77,12 @@ sub is_range {
 
 sub print_number {
     my $self = shift;
-    if ($self->is_range) {
-        $self->min . '-' . $self->max;
-    }
-    else {
-        ($self->vague ? '~' : '')
-        .  $self->min;
-    }
+
+    ($self->vague ? '~' : '')
+    .
+    ($self->is_range ?
+        $self->min . '-' . $self->max
+      : $self->min);
 }
 
 sub add_number {

@@ -1,5 +1,5 @@
 use strict; use warnings;
-use Test::More tests => 15;
+use Test::More tests => 19;
 use Number::Vague;
 
 sub num { Number::Vague->parse(shift); }
@@ -23,3 +23,7 @@ ok !$range->vague, 'Range is not vague';
 is $range->min, 14, 'min of range ok';
 is $range->max, 17, 'max of range ok';
 
+is num(100),    '100',  'overload normal ok';
+is num('~100'), '~100', 'overload vague ok';
+is $range,      '14-17', 'overload range ok';
+is ($range + num('~1'), '~15-18', 'vague range ok');
